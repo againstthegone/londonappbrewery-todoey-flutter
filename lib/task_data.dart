@@ -22,4 +22,9 @@ class TaskData extends ChangeNotifier {
     task.isComplete = isComplete;
     notifyListeners();
   }
+
+  removeTask(Task task) {
+    _tasks.remove(task);
+    notifyListeners();
+  }
 }

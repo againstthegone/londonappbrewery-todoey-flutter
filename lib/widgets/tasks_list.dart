@@ -17,6 +17,9 @@ class TasksList extends StatelessWidget {
             onChanged: (value) {
               taskData.markTaskState(taskData.tasks[index], value ?? false);
             },
+            onLongPress: () {
+              taskData.removeTask(taskData.tasks[index]);
+            },
           );
         },
         itemCount: taskData.taskCount,

@@ -5,8 +5,10 @@ import '../task.dart';
 class TaskTile extends StatelessWidget {
   final Task task;
   final void Function(bool?)? onChanged;
+  final void Function()? onLongPress;
 
-  const TaskTile(this.task, {Key? key, this.onChanged}) : super(key: key);
+  const TaskTile(this.task, {Key? key, this.onChanged, this.onLongPress})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +26,7 @@ class TaskTile extends StatelessWidget {
         value: task.isComplete,
         onChanged: onChanged,
       ),
+      onLongPress: onLongPress,
     );
   }
 }
