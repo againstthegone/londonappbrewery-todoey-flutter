@@ -1,30 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import '../task.dart';
+import '../task_data.dart';
 import '../widgets/tasks_list.dart';
 import 'add_task_screen.dart';
 
-class TasksScreen extends StatefulWidget {
+class TasksScreen extends StatelessWidget {
   const TasksScreen({Key? key}) : super(key: key);
 
   @override
-  State<TasksScreen> createState() => _TasksScreenState();
-}
-
-class _TasksScreenState extends State<TasksScreen> {
-  final List<Task> tasks = [];
-
-  @override
   Widget build(BuildContext context) {
+    final TaskData taskData = Provider.of<TaskData>(context);
+
     return Scaffold(
       backgroundColor: Colors.lightBlueAccent,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showModalBottomSheet(
             context: context,
-            builder: (context) => AddTaskScreen(
-              onTaskAdd: (task) => setState(() => tasks.add(task)),
-            ),
+            builder: (context) => const AddTaskScreen(),
             backgroundColor: Colors.transparent,
             isScrollControlled: true,
           );
@@ -59,7 +53,7 @@ class _TasksScreenState extends State<TasksScreen> {
                   ),
                 ),
                 Text(
-                  '${tasks.length} Tasks',
+                  '${taskData.tasks.length} Tasks',
                   style: const TextStyle(color: Colors.white, fontSize: 18.0),
                 ),
               ],
@@ -75,11 +69,7 @@ class _TasksScreenState extends State<TasksScreen> {
                   topRight: Radius.circular(20.0),
                 ),
               ),
-              child: TasksList(tasks, onTaskCheckChanged: (task, value) {
-                setState(() {
-                  task.isComplete = value;
-                });
-              }),
+              child: const TasksList(),
             ),
           ),
         ],

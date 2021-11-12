@@ -1,4 +1,4 @@
-package com.againstthegone.todey_flutter
+package com.againstthegone.todoey_flutter
 
 import io.flutter.embedding.android.FlutterActivity
 

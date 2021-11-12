@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../task.dart';
+import '../task_data.dart';
 
 class AddTaskScreen extends StatelessWidget {
   final void Function(Task)? onTaskAdd;
@@ -15,8 +17,8 @@ class AddTaskScreen extends StatelessWidget {
       child: Padding(
         padding: MediaQuery.of(context).viewInsets,
         child: Container(
-          padding: EdgeInsets.all(40.0),
-          decoration: BoxDecoration(
+          padding: const EdgeInsets.all(40.0),
+          decoration: const BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(20.0),
@@ -27,7 +29,7 @@ class AddTaskScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
+              const Text(
                 'Add Task',
                 style: TextStyle(
                   fontSize: 30.0,
@@ -38,7 +40,7 @@ class AddTaskScreen extends StatelessWidget {
               TextField(
                 autofocus: true,
                 textAlign: TextAlign.center,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.lightBlueAccent),
                   ),
@@ -47,15 +49,14 @@ class AddTaskScreen extends StatelessWidget {
                   taskText = value;
                 },
               ),
-              SizedBox(height: 20.0),
+              const SizedBox(height: 20.0),
               TextButton(
                 onPressed: () {
-                  if (onTaskAdd != null) {
-                    onTaskAdd!(Task(taskText));
-                  }
+                  Provider.of<TaskData>(context, listen: false)
+                      .addTask(Task(taskText));
                   Navigator.pop(context);
                 },
-                child: Text(
+                child: const Text(
                   'Add',
                   style: TextStyle(color: Colors.white, fontSize: 12.0),
                 ),
